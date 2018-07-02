@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <script src="assets/js/jquery-3.2.1.js"></script>
+  <title>Exercice 3</title>
+</head>
+<body>
+  <button type="button" id="valider">Valider</button>
+  <input type="text" id="reponse" />
+  <span id="resultat"></span>
+  <div id="essai"></div>
+  <script>
+  //Déclaration de la valeur aléatoire
+  resultat = Math.floor(Math.random() * 100);
+  //Déclaration de la variable résultat
+  reponse = 0;
+  //Déclaration de la variable essai
+  essai = 0
+  //Déclaration de la fonction
+  $(function() {
+    //Déclanchement de l'évenement au moment du clic sur le bouton
+    $('#valider').click(function() {
+      //Intégration de la valeur entré par le visiteur dans la variable reponse
+      reponse = $('#reponse').val();
+      //Déclaration de la régex
+      regex = /^([0-9]|[1-9][0-9]|100)$/;
+      //Teste de la variable réponse (nombre compris entre 0 et 100)
+      if (regex.test(reponse)) {
+        //Incrémentation du nombre d'essai
+        essai = ++essai;
+        //Affichage du nombre d'essai
+        $('#essai').text('Nombre d\'éssai : ' + essai);
+        //Si la réponse est égale au résultat...
+        if (reponse == resultat) {
+          //Afficher correct
+          $('#resultat').text('correcte');
+          //Sinon si la réponse est inférieur au résultat...
+        } else if (reponse < resultat) {
+          //Afficher plus
+          $('#resultat').text('plus');
+          //Sinon si la réponse est supérieur au résultat...
+        } else if (reponse > resultat) {
+          //Afficher moins
+          $('#resultat').text('moins');
+          //Sinon
+        } else {
+          //Afficher entrez une valeur
+          $('#resultat').text('Entrez une valeur comprise entre 0 et 100');
+        };
+      } else {
+        //Méssage d'érreur
+        $('#resultat').text('Mauvaise saisie veuillez entrer un nombre compris entre 0 et 100');
+      };
+    })
+  });
+  </script>
+</body>
+</html>
